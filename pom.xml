@@ -29,13 +29,8 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suites/regression.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/regression.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${basedir}/target/allure-results</allure.results.directory>
-                        <allure.link.tms.pattern>https://kwri-jira.kw.com/browse/{}</allure.link.tms.pattern>
-                        <allure.link.issue.pattern>https://kwri-jira.kw.com/browse/{}</allure.link.issue.pattern>
-                    </systemPropertyVariables>
                     <reportsDirectory>${basedir}/target/test-output</reportsDirectory>
                 </configuration>
                 <dependencies>
