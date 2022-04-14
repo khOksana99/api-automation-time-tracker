@@ -1,10 +1,9 @@
-package com.timetracker.auto.tests;
+package com.timetracker.auto.tests.categories;
 
-import com.timetracker.auto.constans.EndPoints;
 import com.timetracker.auto.pojo.Category;
 import org.testng.annotations.Test;
 
-import static com.timetracker.auto.constans.ErrorMsg.createCategoryWithId;
+import static com.timetracker.auto.constans.ErrorMsg.idIsForbidden;
 import static com.timetracker.auto.constans.ErrorMsg.titleIsRequiredField;
 import static com.timetracker.auto.constans.JsonPath.errorMsg;
 import static com.timetracker.auto.constans.JsonPath.title;
@@ -31,7 +30,7 @@ public class CreateCategoryTests {
                 .then()
                 .assertThat()
                 .statusCode(SC_NOT_ACCEPTABLE)
-                .body(errorMsg, equalTo(createCategoryWithId));
+                .body(errorMsg, equalTo(idIsForbidden));
     }
 
     @Test(description = "[Negative]Create category with incorrect data(set id)")
