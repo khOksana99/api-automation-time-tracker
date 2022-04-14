@@ -1,4 +1,4 @@
-package com.timetracker.auto.tests;
+package com.timetracker.auto.tests.categories;
 
 import com.timetracker.auto.constans.EndPoints;
 import com.timetracker.auto.pojo.Category;

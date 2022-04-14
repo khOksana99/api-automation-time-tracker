@@ -5,7 +5,7 @@
 
     <test name="Create category">
         <classes>
-            <class name="com.timetracker.auto.tests.CreateCategoryTests"/>
+            <class name="com.timetracker.auto.tests.categories.CreateCategoryTests"/>
         </classes>
     </test>
 </suite>
