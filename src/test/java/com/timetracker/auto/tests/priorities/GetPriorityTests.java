@@ -1,5 +1,6 @@
 package com.timetracker.auto.tests.priorities;
 
+import com.timetracker.auto.constans.ConstantsLists;
 import com.timetracker.auto.pojo.Priority;
 import com.timetracker.auto.utils.Utils;
 import org.junit.Assert;
@@ -16,9 +17,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GetPriorityTests {
     private int createdPriority;
-    private final String TITLE = "title " + Utils.getCurrentMS();
-    private final int INCORRECT_ID = 123546;
-    private final String color = "#f05f5f";
+    private final String TITLE = Utils.getRandomElementFromList(ConstantsLists.getNamesListForPriorities());
+    private final String color = Utils.getRandomElementFromList(ConstantsLists.getColorsList());
+    private final int INCORRECT_ID = Utils.getRandomInteger();
 
     @BeforeClass
     public void dataSetUp() {

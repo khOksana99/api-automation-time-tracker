@@ -2,7 +2,7 @@ package com.timetracker.auto.services;
 
 import com.timetracker.auto.constans.EndPoints;
 import com.timetracker.auto.pojo.Category;
-import com.timetracker.auto.pojo.Priority;
+import com.timetracker.auto.pojo.Task;
 import io.restassured.response.Response;
 
 import java.util.List;
@@ -10,86 +10,78 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
-public class CategoryService extends BaseService {
-    public static Response createCategory(Category category) {
-        return given()
-                .spec(getRequestSpec(BASE_URI))
-                .when()
-                .body(category)
-                .post(EndPoints.ADD_CATEGORY.getEndpoint())
-                .then()
-                .extract()
-                .response();
-    }
-
-    public static Response deleteCategory(int id) {
-        return given()
-                .spec(getRequestSpec(BASE_URI))
-                .when()
-                .delete(EndPoints.DELETE_CATEGORY.getEndpoint() + id)
-                .then()
-                .extract()
-                .response();
-    }
-
-    public static Response getCategoryById(int id) {
+public class TaskService extends BaseService {
+    public static Response createTask(Task task) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
                 .when().log().all()
-                .get(EndPoints.GET_CATEGORY.getEndpoint() + id)
+                .body(task)
+                .post(EndPoints.ADD_TASK.getEndpoint())
                 .then().log().all()
                 .extract()
                 .response();
     }
 
-    public static Response getAllCategories() {
+    public static Response deleteTask(int id) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
                 .when()
-                .get(EndPoints.GET_ALL_CATEGORIES.getEndpoint())
+                .delete(EndPoints.DELETE_TASK.getEndpoint() + id)
                 .then()
                 .extract()
                 .response();
     }
 
-    public static Response searchCategoryByTitle(String title) {
+    public static Response getTaskById(int id) {
+        return given()
+                .spec(getRequestSpec(BASE_URI))
+                .when().log().all()
+                .get(EndPoints.GET_TASK.getEndpoint() + id)
+                .then().log().all()
+                .extract()
+                .response();
+    }
+
+    public static Response getAllTasks() {
+        return given()
+                .spec(getRequestSpec(BASE_URI))
+                .when()
+                .get(EndPoints.GET_ALL_TASKS.getEndpoint())
+                .then()
+                .extract()
+                .response();
+    }
+
+    public static Response searchTaskByTitle(String title) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
                 .when().log().all()
                 .body("{\"title\":\"" + title +"\"}")
-                .post(EndPoints.SEARCH_CATEGORY.getEndpoint())
+                .post(EndPoints.SEARCH_TASK.getEndpoint())
                 .then().log().all()
                 .extract()
                 .response();
     }
 
-    public static Response updateCategory(Category category) {
+    public static Response updateTask(Task task) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
                 .when()
-                .body(category)
-                .put(EndPoints.UPDATE_CATEGORY.getEndpoint())
+                .body(task)
+                .put(EndPoints.UPDATE_TASK.getEndpoint())
                 .then()
                 .extract()
                 .response();
     }
 
-    public static int convertCreateCategoryToId(Response response) {
+    public static int convertCreateTaskToId(Response response) {
         response.then().statusCode(SC_OK);
         return response.jsonPath().getInt("id");
     }
 
-    public static List<Category> getCategoriesList() {
-        Response response = getAllCategories();
+    public static List<Category> getTasksList() {
+        Response response = getAllTasks();
         response.then().assertThat().statusCode(SC_OK);
         return response.jsonPath().getList("$");
-    }
-
-    public static Category getCategoryAsObject(Response response) {
-        response.then().assertThat().statusCode(SC_OK);
-        return Category.builder()
-                .id(response.jsonPath().getInt("id"))
-                .title(response.jsonPath().getString("title"))
-                .build();
     }
 }
