@@ -1,5 +1,6 @@
 package com.timetracker.auto.tests.priorities;
 
+import com.timetracker.auto.constans.ConstantsLists;
 import com.timetracker.auto.pojo.Priority;
 import com.timetracker.auto.utils.Utils;
 import org.testng.annotations.BeforeClass;
@@ -18,21 +19,21 @@ public class UpdatePriorityTests {
     private int firstCreatedPriority;
     private int secondCreatedPriority;
     private int thirdCreatedPriority;
-    private final String color = "#f05f5f";
-    private final String EDITED_COLOR = "#ffff";
-    private final String START_TITLE = "title " + Utils.getCurrentMS();
-    private final String EDITED_TITLE = "edited " + Utils.getCurrentMS();
+    private final String START_TITLE = Utils.getRandomElementFromList(ConstantsLists.getNamesListForPriorities());
+    private final String EDITED_TITLE = "edited " + START_TITLE;
+    private final String COLOR = Utils.getRandomElementFromList(ConstantsLists.getColorsList());
+    private final String EDITED_COLOR = Utils.getRandomElementFromList(ConstantsLists.getColorsList());
 
     @BeforeClass
     public void dataSetUp() {
-        firstCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(color).build()));
-        secondCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(color).build()));
-        thirdCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(color).build()));
+        firstCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(COLOR).build()));
+        secondCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(COLOR).build()));
+        thirdCreatedPriority = convertCreatePriorityToId(createPriority(Priority.builder().title(START_TITLE).color(COLOR).build()));
     }
 
     @Test(description = "[Positive] Update priority title")
     public void verifyUpdatePriorityTitleTest() {
-        updatePriority(Priority.builder().id(firstCreatedPriority).title(EDITED_TITLE).color(color).build())
+        updatePriority(Priority.builder().id(firstCreatedPriority).title(EDITED_TITLE).color(COLOR).build())
                 .then()
                 .assertThat()
                 .statusCode(SC_OK);
@@ -79,7 +80,7 @@ public class UpdatePriorityTests {
 
     @Test(description = "[Negative] Update priority without title provided")
     public void verifyUpdatePriorityWithoutTitleTest() {
-        updatePriority(Priority.builder().id(thirdCreatedPriority).color(color).build())
+        updatePriority(Priority.builder().id(thirdCreatedPriority).color(COLOR).build())
                 .then()
                 .assertThat()
                 .statusCode(SC_NOT_ACCEPTABLE)

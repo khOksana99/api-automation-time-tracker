@@ -79,9 +79,18 @@ public class PriorityService extends BaseService {
         return response.jsonPath().getInt("id");
     }
 
-    public static List<Category> getPrioritiesList() {
+    public static List<Priority> getPrioritiesList() {
         Response response = getAllPriorities();
         response.then().assertThat().statusCode(SC_OK);
         return response.jsonPath().getList("$");
+    }
+
+    public static Priority getPriorityAsObject(Response response) {
+        response.then().assertThat().statusCode(SC_OK);
+        return Priority.builder()
+                .id(response.jsonPath().getInt("id"))
+                .title(response.jsonPath().getString("title"))
+                .color(response.jsonPath().getString("color"))
+                .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.timetracker.auto.tests.categories;
 
+import com.timetracker.auto.constans.ConstantsLists;
 import com.timetracker.auto.constans.EndPoints;
 import com.timetracker.auto.pojo.Category;
 import com.timetracker.auto.utils.Utils;
@@ -16,8 +17,8 @@ import static org.hamcrest.Matchers.*;
 
 public class GetCategoryTests {
     private int createdCategory;
-    private final String TITLE = "title " + Utils.getCurrentMS();
-    private final int INCORRECT_ID = 123546;
+    private final String TITLE = Utils.getRandomElementFromList(ConstantsLists.getNamesListForCategories());
+    private final int INCORRECT_ID = Utils.getRandomInteger();
 
     @BeforeClass
     public void dataSetUp() {

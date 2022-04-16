@@ -1,5 +1,6 @@
 package com.timetracker.auto.tests.categories;
 
+import com.timetracker.auto.constans.ConstantsLists;
 import com.timetracker.auto.constans.EndPoints;
 import com.timetracker.auto.pojo.Category;
 import com.timetracker.auto.utils.Utils;
@@ -18,8 +19,8 @@ public class UpdateCategoryTests {
     private int firstCreatedCategory;
     private int secondCreatedCategory;
     private int thirdCreatedCategory;
-    private final String START_TITLE = "title " + Utils.getCurrentMS();
-    private final String EDITED_TITLE = "edited " + Utils.getCurrentMS();
+    private final String START_TITLE = Utils.getRandomElementFromList(ConstantsLists.getNamesListForCategories());
+    private final String EDITED_TITLE = "edited " + START_TITLE;
 
     @BeforeClass
     public void dataSetUp() {

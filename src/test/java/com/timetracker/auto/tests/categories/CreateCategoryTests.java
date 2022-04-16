@@ -1,6 +1,8 @@
 package com.timetracker.auto.tests.categories;
 
+import com.timetracker.auto.constans.ConstantsLists;
 import com.timetracker.auto.pojo.Category;
+import com.timetracker.auto.utils.Utils;
 import org.testng.annotations.Test;
 
 import static com.timetracker.auto.constans.ErrorMsg.idIsForbidden;
@@ -13,7 +15,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateCategoryTests {
-    private final String categoryTitle = "New category";
+    private final String categoryTitle = Utils.getRandomElementFromList(ConstantsLists.getNamesListForCategories());
 
     @Test(description = "[Positive]Create category with correct data")
     public void verifyCreateCategoryWithCorrectDataTest() {
