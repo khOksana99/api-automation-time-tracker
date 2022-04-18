@@ -1,8 +1,8 @@
 package com.timetracker.auto.services;
 
 import com.timetracker.auto.constans.EndPoints;
-import com.timetracker.auto.pojo.Category;
 import com.timetracker.auto.pojo.Priority;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.util.List;
@@ -11,6 +11,7 @@ import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class PriorityService extends BaseService {
+    @Step("Create priority")
     public static Response createPriority(Priority priority) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -22,6 +23,7 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Delete priority")
     public static Response deletePriority(int id) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -32,6 +34,7 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Get priority by id")
     public static Response getPriorityById(int id) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -42,6 +45,7 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Get all priorities")
     public static Response getAllPriorities() {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -52,6 +56,7 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Search priority by title")
     public static Response searchPriorityByTitle(String title) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -63,6 +68,7 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Edit priority")
     public static Response updatePriority(Priority priority) {
         return given()
                 .spec(getRequestSpec(BASE_URI))
@@ -74,17 +80,20 @@ public class PriorityService extends BaseService {
                 .response();
     }
 
+    @Step("Convert priority to id")
     public static int convertCreatePriorityToId(Response response) {
         response.then().statusCode(SC_OK);
         return response.jsonPath().getInt("id");
     }
 
+    @Step("Create priorities list")
     public static List<Priority> getPrioritiesList() {
         Response response = getAllPriorities();
         response.then().assertThat().statusCode(SC_OK);
         return response.jsonPath().getList("$");
     }
 
+    @Step("Get priority object")
     public static Priority getPriorityAsObject(Response response) {
         response.then().assertThat().statusCode(SC_OK);
         return Priority.builder()
