@@ -8,10 +8,6 @@ import java.util.Random;
 public class Utils {
     private static Random r = new Random();
 
-    public static Long getCurrentMS() {
-        return Calendar.getInstance().getTimeInMillis();
-    }
-
     public static Date getFutureDate() {
         Calendar date = Calendar.getInstance();
         long timeInSecs = date.getTimeInMillis();
