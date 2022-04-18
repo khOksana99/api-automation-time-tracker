@@ -14,15 +14,15 @@ jobs:
       - run:
           name: Build
           command: mvn clean package
-      -run:
-        name: Test running
-        command: mvn test
       - run:
-        name: Generate allure report
-        command: mvn allure:report
+         name: Test running
+         command: mvn test
+      - run:
+         name: Generate allure report
+         command: mvn allure:report
       - store_artifacts:
-        path: target/site/allure-maven-plugin
-        destination: Allure
+         path: target/site/allure-maven-plugin
+         destination: Allure
 
 workflows:
   version: 2
