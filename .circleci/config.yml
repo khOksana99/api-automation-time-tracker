@@ -44,4 +44,4 @@ workflows:
               only:
                 - master
     jobs:
-      - schedule_run
+      - build
